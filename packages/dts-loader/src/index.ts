@@ -22,8 +22,9 @@ function getTSConfig(cwd: string): ts.CompilerOptions {
     throw new Error("Could not find a valid 'tsconfig.json'.")
   }
 
-  const tsconfig = require(tsconfigPath)
-  return tsconfig
+  const configFile = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
+
+  return configFile.config;
 }
 
 const parseConfigHost = {
